@@ -5,7 +5,7 @@ import 'package:movie_list_getx/app/routes/app_routes.dart';
 
 class AppPages {
   static final pages = [
-    GetPage(name: AppRoutes.movieList, page: () => const MovieListScreen()),
+    GetPage(name: AppRoutes.movieList, page: () => const MovieListScreen(appBarTitle: '',)),
     GetPage(name: AppRoutes.movieDetail, page: () => const MovieDetailScreen()),
   ];
 }
