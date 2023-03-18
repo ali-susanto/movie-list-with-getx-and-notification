@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_list_getx/app/modules/home/home_screen.dart';
 import 'package:movie_list_getx/app/modules/movie_list/movie_list_screen.dart';
 import 'package:movie_list_getx/app/routes/app_pages.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MovieListScreen(),
+      home: const HomeScreen(),
       initialBinding: MovieListBinding(),
       getPages: AppPages.pages,
     );
