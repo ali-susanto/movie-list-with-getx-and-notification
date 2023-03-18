@@ -17,12 +17,11 @@ class MovieListScreen extends StatelessWidget {
             title: const Text('MovieKu'),
           ),
           body: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
-            child: controller.isLoading
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: controller.obx((state) {
+                return SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -31,43 +30,49 @@ class MovieListScreen extends StatelessWidget {
                           height: 10,
                         ),
                         GridView.builder(
+                            physics: const ScrollPhysics(),
                             shrinkWrap: true,
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 3),
-                            itemCount: controller.movieList.length,
+                              crossAxisSpacing: 10,
+                              crossAxisCount: 3,
+                              childAspectRatio: 0.7,
+                            ),
+                            itemCount:
+                                controller.movieList.getRange(1, 10).length,
                             itemBuilder: (context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(bottom: 20.0),
-                                child: SizedBox(
-                                  child: Column(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(12),
-                                        child: SizedBox(
-                                          height: size.width * 0.3,
-                                          width: size.width * 0.25,
-                                          child: Image.network(
-                                            imgPath +
-                                                controller.movieList[index]
-                                                    .posterPath,
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: SizedBox(
+                                      height: size.width * 0.3,
+                                      width: size.width * 0.25,
+                                      child: Image.network(
+                                        imgPath +
+                                            controller
+                                                .movieList[index].posterPath,
+                                        fit: BoxFit.fill,
                                       ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
-                                      Text(controller.movieList[index].title)
-                                    ],
+                                    ),
                                   ),
-                                ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    controller.movieList[index].title,
+                                    style: const TextStyle(fontSize: 12),
+                                  )
+                                ],
                               );
                             })
                       ],
                     ),
                   ),
-          ),
+                );
+              }, onLoading: const CircularProgressIndicator())),
         );
       },
     );
