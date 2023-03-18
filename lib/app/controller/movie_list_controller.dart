@@ -17,7 +17,7 @@ class MovieListController extends GetxController with StateMixin {
     isLoading = true;
     change(null, status: RxStatus.loading());
     try {
-      var response = await apiProvider.getMovie();
+      var response = await apiProvider.getUpcomingMovie();
       if (response.statusCode == 200) {
         var dataMovie = MovieModel.fromJson(response.data);
         movieList = dataMovie.results;
